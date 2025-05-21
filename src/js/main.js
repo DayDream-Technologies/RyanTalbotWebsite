@@ -98,11 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Bio timeline dots ---
   const images = [
-    'src/images/event1.jpg',
-    'src/images/event2.jpg',
-    'src/images/event3.jpg',
-    'src/images/event4.jpg',
-    'src/images/event5.jpg'
+    'src/images/timeline/hs-pr.png',
+    'src/images/timeline/panam-tv.png',
+    'src/images/timeline/big-ten-first-place.png',
+    'src/images/Team_USA_pics/flag_flex.jpg',
+    'src/images/timeline/gvsu-coaching.jpg'
   ];
   const descriptions = [
     '2018 – Broke HS pole vault record at 16\'0"',
