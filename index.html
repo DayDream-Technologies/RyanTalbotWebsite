@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryan Talbot Profile</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="src/css/styles.css">
+  <!-- Enable smooth scrolling -->
+  <style> html { scroll-behavior: smooth; } </style>
+</head>
+<body>
+
+
+  <!-- Fixed right navigation -->
+  <nav class="profile-nav">
+    <a href="#overview" class="active">Overview</a>
+    <a href="#bio">Bio</a>
+    <a href="#competitions">Competitions</a>
+    <a href="#diet">Diet & Coaching</a>
+    <a href="#timeline">Career Timeline</a>
+  </nav>
+
+  <main>
+    <section id="overview" class="section overview-section">
+      <div class="overview-container">
+        <!-- Big stats wrapper -->
+        <div class="stats-wrapper">
+          <h2 class="overview-title">
+            <img
+              class="overview-logo"
+              src="src/images/RyanTalLogoDraft3.svg"
+              alt="Ryan Talbot Logo"
+            >
+            <em>RYAN TALBOT</em>
+          </h2>
+          <div class="inner-stats-box">
+            <div class="stats-grid">
+              <div class="stat-card">
+                <p class="stat-value">83</p>
+                <p class="stat-label">DECATHLON</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-value">440</p>
+                <p class="stat-label">DISCUS THROW</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-value">750</p>
+                <p class="stat-label">SHOT PUT</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-value">841</p>
+                <p class="stat-label">110M HURDLES</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-value">1066</p>
+                <p class="stat-label">400M</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-value">2339</p>
+                <p class="stat-label">100M</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="overview-photo">
+          <img
+            src="src/images/slideshow_images/1st_Place_Podium.jpg"
+            alt="Ryan in competition"
+          >
+        </div>
+      </div>
+    </section>
+
+
+      <!-- 2: Bio -->
+    <section id="bio" class="section bio-section">
+      <h2 class="bio-title"><em>BIO</em></h2>
+      <div class="bio-content">
+        <p>Ryan Talbot is an American track and field athlete competing in the Decathlon. Born in Alto, Michigan, he attended Forest Hills Central, following in the footsteps of his mother, a former heptathlete. In 2022, he set the MSU decathlon record with 8064 points and earned bronze at the 2023 Pan American Games.</p>
+        <!-- More bio text here -->
+      </div>
+
+      <!-- Scrollable timeline -->
+      <div class="bio-timeline">
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+          <div class="timeline-dots">
+            <div class="timeline-dot" data-index="0"></div>
+            <div class="timeline-dot" data-index="1"></div>
+            <div class="timeline-dot" data-index="2"></div>
+            <div class="timeline-dot" data-index="3"></div>
+            <div class="timeline-dot" data-index="4"></div>
+          </div>
+        </div>
+
+        <div class="timeline-detail">
+          <img id="timeline-img" src="src/images/placeholder1.jpg" alt="Event image">
+          <p id="timeline-text">
+            Fact #1 about Track and Field: It dates back to the ancient Olympic Games in Greece.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="competitions" class="section comp-section">
+      <h2>Competitions</h2>
+
+      <div class="comp-tab-card">
+        <!-- Tab buttons -->
+        <div class="comp-tabs">
+          <button class="comp-tab active" data-target="current">Current Best</button>
+          <button class="comp-tab"      data-target="alltime">Top All-Time</button>
+        </div>
+
+        <!-- Tab panels -->
+        <div class="comp-tab-content active" id="current">
+          <ul>
+            <li><strong>100 m:</strong> 10.60 s</li>
+            <li><strong>Long jump:</strong> 7.06 m</li>
+            <li><strong>Shot put:</strong> 15.14 m</li>
+            <li><strong>High jump:</strong> 1.91 m</li>
+            <li><strong>400 m:</strong> 47.52 s</li>
+            <li><strong>110 m H:</strong> 14.74 s</li>
+            <li><strong>Discus:</strong> 50.90 m</li>
+            <li><strong>Pole vault:</strong> 5.20 m</li>
+            <li><strong>1500 m:</strong> 4:33.50</li>
+          </ul>
+        </div>
+
+        <div class="comp-tab-content" id="alltime">
+          <ul>
+            <li>Big Ten Champs – MSU, 8064 pts</li>
+            <li>Pan-Am Games, 7742 pts</li>
+            <li>U.S. Trials, 7872 pts</li>
+            <li>Jim Click Shootout, 7677 pts</li>
+            <li>Big Ten Outdoor, 7786 pts</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 4: Diet & Coaching -->
+    <section id="diet" class="section diet-section">
+      <h2>Diet & Coaching</h2>
+      <!-- Content to be added -->
+    </section>
+
+    <!-- 5: Timeline -->
+    <section id="timeline" class="section timeline-section">
+      <h2>Career Timeline</h2>
+      <div class="timeline-box" id="timeline-box">
+        <!-- Timeline events injected by JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Scripts -->
+  <script src="src/js/main.js"></script>
+
+</body>
+</html>

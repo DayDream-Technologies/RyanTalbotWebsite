@@ -1,0 +1,492 @@
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+  background: linear-gradient(to bottom, white, lightgrey);
+  margin: 0;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 5%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#logo {
+  height: 40px;
+}
+
+nav#main-nav a {
+  margin-left: 1.5rem;
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+
+.Track-field {
+  /* example block */
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.track-event {
+  flex: 0 0 50%;
+  margin-bottom: 20px;
+}
+
+.highScore-animate {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.Instagram-profile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* 
+   ONE-PAGE HERO + NAV OVERRIDES
+*/
+body {
+  background-color: #011542 !important;  /* Deep blue backdrop */
+  color: #fff !important;
+  overflow-x: hidden;
+}
+
+.profile-header {
+  background-color: #cdced0 !important;
+  background-image: none !important;
+  height: 15vh;
+  display: flex !important;
+  align-items: center;
+  padding: 0 5% !important;
+}
+
+.profile-header .logo {
+  width: 100px !important;
+  margin-right: 2rem !important;
+}
+
+.profile-header .info h1 {
+  font-size: 3rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.profile-nav {
+  position: fixed !important;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+/* 
+   Nav Link Boxes
+*/
+.profile-nav a {
+  display: inline-block;             
+  background-color: rgba(255,255,255,0.9); 
+  color: #333 !important;               /* dark text for contrast */
+  padding: 0.5rem 1rem;                
+  margin: 0.25rem 0;                  
+  border-radius: 4px;                 
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.profile-nav a:hover,
+.profile-nav a.active {
+  background-color: #e0e0e0;            /* darker grey on hover/active */
+}
+
+
+.section {
+  display: block !important;
+  padding: 100px 5% !important;
+  background-color: transparent !important;
+  color: #fff !important;
+}
+
+/* subtle separators */
+section#overview { border-top: 1px solid rgba(255,255,255,0.2); }
+section#stats    { border-top: 1px solid rgba(255,255,255,0.2); }
+section#timeline { border-top: 1px solid rgba(255,255,255,0.2); }
+section#diet     { border-top: 1px solid rgba(255,255,255,0.2); }
+section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
+
+/*
+   Overview Section Two-Column Layout
+*/
+.overview-section {
+  background-color: #5225f6 !important; /* Purple background */
+  padding: 100px 5%;
+}
+
+.overview-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.overview-stats {
+  flex: 1;
+  color: #fff;
+}
+
+.overview-stats h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.overview-photo {
+  flex: 1;
+  text-align: center;
+  margin-top: 6rem;
+}
+
+.overview-photo img {
+  max-width: 90%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/*
+   Overview Stats Grid & Cards
+*/
+
+/* Slim down the grid and cards */
+.overview-section .stats-grid {
+  display: grid !important;
+  /* three columns but each no wider than 100px */
+  grid-template-columns: repeat(auto-fit, minmax(85px, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+.overview-title {
+  white-space: nowrap;
+  font-size: 2rem;
+}
+
+.overview-section .stat-card {
+  padding: .5rem !important;
+  text-align: center !important;
+  background-color: #837cc4 !important;
+  border-radius: 8px !important;
+}
+
+/* Styling the two lines */
+.stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+}
+.stat-label {
+  font-size: 0.75rem;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+/* 
+   Boxed Section Containers
+*/
+.section {
+  width: 90%;             
+  max-width: 1000px;        
+  margin: 2rem auto !important;
+  padding: 2rem !important;
+  background-color: #fff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+  color: inherit !important;
+}
+
+
+/*
+   Section Accent Backgrounds
+*/
+#overview {
+  background-color: #250790 !important;   
+  color: #fff !important;
+}
+#bio {
+  background-color: #c7c7c8 !important;   
+  color: #fff !important;
+}
+#competitions {
+  background-color: #c7c7c8 !important;  
+  color: #c3c3c3 !important;
+}
+#diet {
+  background-color: #250790 !important;  
+  color: #cfcdcd !important;
+}
+#timeline {
+  background-color: #250790 !important;  
+  color: #cfcdcd !important;
+}
+
+.stats-wrapper {
+  background-color: rgba(37, 7, 144, 0.85);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.overview-logo {
+  width: 72px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.inner-stats-box {
+  background-color: rgba(63, 40, 145, 0.865); 
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+/* Overview logo circle */
+.overview-logo {
+  display: inline-block;        
+  width: 60px;                
+  height: 60px;
+  padding: 1px;              
+  background-color: #e0e0e0;   
+  border-radius: 50%;         
+  object-fit: contain;        
+  margin-right: 0.3rem;      
+  vertical-align: middle;     
+}
+
+/* 
+   BIO Section & Scrollable Timeline
+*/
+.bio-section {
+  background-color: #fff !important;
+  color: #333 !important;
+  padding: 2rem !important;
+}
+
+.bio-title {
+  font-style: italic !important;
+  font-size: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.bio-timeline {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Timeline track */
+.timeline-container {
+  position: relative;
+  width: 3rem;
+  height: 300px;          
+  overflow-y: auto;
+  padding: 0 1rem;
+}
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  top: 0;
+  bottom: 0;
+  background-color: #ccc;
+}
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: #28a745; 
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+/* Distribute 5 dots evenly */
+.timeline-dot:nth-child(1) { top:   0%; }
+.timeline-dot:nth-child(2) { top:  25%; }
+.timeline-dot:nth-child(3) { top:  50%; }
+.timeline-dot:nth-child(4) { top:  75%; }
+.timeline-dot:nth-child(5) { top: 100%; }
+
+.timeline-dot:hover,
+.timeline-dot.active {
+  background-color: #19692c; 
+}
+
+/* Detail pane */
+.timeline-detail {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.timeline-detail img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+.timeline-detail p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+
+/* 
+   Competitions Section Revamp
+*/
+.comp-section {
+  background-color: #f2f2f2 !important;  /* light grey backdrop */
+}
+
+.comp-section h2 {
+  margin-bottom: 1.5rem !important;
+  color: #f1f1f1 !important;
+}
+
+/* two-column responsive grid */
+.comp-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* card styles */
+.comp-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  flex: 1 1 280px;    /* grows, shrinks, base 280px */
+  padding: 1.5rem;
+  color: #333;
+}
+
+/* card heading */
+.comp-card h3 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: #5A3EBD;
+  margin-bottom: 1rem;
+}
+
+/* list reset + custom bullets */
+.comp-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.comp-card li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.comp-card li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #5A3EBD;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* 
+   Competitions Tab‐Card
+*/
+.comp-tab-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Tab buttons */
+.comp-tabs {
+  display: flex;
+  background: #f2f2f2;
+}
+.comp-tab {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  background: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.comp-tab:hover {
+  background: #e0e0e0;
+}
+.comp-tab.active {
+  background: #5A3EBD;
+  color: #fff;
+}
+
+/* Tab panels */
+.comp-tab-content {
+  display: none;
+  padding: 1.5rem;
+  color: #333;
+}
+.comp-tab-content.active {
+  display: block;
+}
+
+/* List styling */
+.comp-tab-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.comp-tab-content li {
+  margin-bottom: 0.75rem;
+  padding-left: 1rem;
+  position: relative;
+}
+.comp-tab-content li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #5A3EBD;
+}
