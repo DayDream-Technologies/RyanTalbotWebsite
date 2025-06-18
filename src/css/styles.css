@@ -154,13 +154,17 @@ section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
 
 .overview-container {
   display: flex;
-  align-items: center;
+  align-items: stretch; /* Make columns equal height */
   justify-content: space-between;
   gap: 2rem;
 }
 
 .overview-stats {
-  flex: 1;
+  flex: 2 1 500px;      /* Make left box larger */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 500px;    /* Ensures it's at least as tall as the image */
   color: #fff;
 }
 
@@ -172,13 +176,18 @@ section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
 }
 
 .overview-photo {
-  flex: 1;
+  flex: 1 1 180px;
   text-align: center;
   margin-top: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .overview-photo img {
-  max-width: 90%;
+  max-width: 500px;     /* Make image smaller */
+  max-height: 500px;    /* Limit image height */
+  width: 100%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -243,12 +252,12 @@ section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
   color: #fff !important;
 }
 #bio {
-  background-color: #c7c7c8 !important;   
-  color: #250790 !important;
+  background-color: #250790 !important;   
+  color: #cfcdcd !important;
 }
 #competitions {
-  background-color: #c7c7c8 !important;  
-  color: #c3c3c3 !important;
+  background-color: #250790 !important;  
+  color: #cfcdcd !important;
 }
 #diet {
   background-color: #250790 !important;  
@@ -307,15 +316,25 @@ section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
 }
 
 .bio-main-text-box {
-  background: rgba(138, 138, 232, 0.365);
-  border-radius: 12px;
-  padding: 1.5rem 2rem;
-  margin: 2rem 0 2.5rem 0;
-  color: #ffffff;
+  background: rgba(239, 239, 239, 0.365);
+  border-radius: 8px;
+  padding: 1rem 1rem;
+  margin: 1rem 0 1.5rem 0;
+  color: #f0f0f0;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.bio-description-box {
+  background: #fff;
+  color: #333;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 0 auto 2rem auto;
+  max-width: 700px;
 }
 
 .bio-timeline {
@@ -431,7 +450,7 @@ section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
 
 .comp-section h2 {
   margin-bottom: 1.5rem !important;
-  color: #250790 !important;
+  color: #e1e1e1 !important;
 }
 
 /* two-column responsive grid */
@@ -510,7 +529,7 @@ section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
   background: #e0e0e0;
 }
 .comp-tab.active {
-  background: #5A3EBD;
+  background: #cdcbd2;
   color: #fff;
 }
 
@@ -518,7 +537,7 @@ section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
 .comp-tab-content {
   display: none;
   padding: 1.5rem;
-  color: #333;
+  color: #333333;
 }
 .comp-tab-content.active {
   display: block;
@@ -562,14 +581,14 @@ section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
 
 .timeline-scroll-buttons button {
   background: #fff;
-  border: 1px solid #ccc;
+  border: 1px solid #d7d7d7;
   border-radius: 50%;
   width: 32px;
-  height: 32px;
+  height: 29px;
   font-size: 18px;
   cursor: pointer;
   transition: background 0.2s;
-  color: #250790;
+  color: #270790;
 }
 
 .timeline-scroll-buttons button:hover {
@@ -603,11 +622,11 @@ section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
 .diet-img {
   width: 220px;
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 .diet-text-box {
   flex: 2 1 320px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(246, 243, 243, 0.08);
   border-radius: 10px;
   padding: 1.5rem;
   color: #fff;
@@ -621,11 +640,20 @@ section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
   margin-top: 1.5rem;
 }
 .socials-box {
-  flex: 1 1 200px;
-  background: rgba(255,255,255,0.08);
+  flex: 0 1 220px;
+  max-width: 260px;
+  min-width: 180px;
+  background: #fff !important;
+  color: #333 !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   border-radius: 10px;
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   text-align: center;
+  height: 160px;           /* Reduce height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center content */
+  gap: 0.5rem;
 }
 .social-icon {
   width: 48px;
@@ -664,4 +692,13 @@ section#contact  { border-top: 1px solid rgba(255,255,255,0.2); }
 }
 .contact-btn:hover {
   background: #3f2891;
+}
+
+/* Match Diet and Socials/Coaching text boxes to Competitions card color */
+.diet-text-box,
+.socials-box,
+.coaching-box {
+  background: #fff !important;
+  color: #333 !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
