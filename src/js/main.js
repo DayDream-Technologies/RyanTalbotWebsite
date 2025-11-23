@@ -56,7 +56,7 @@ var trackEvents = [
             currentTimelineIndex = (currentTimelineIndex + 1) % events.length; // Move to the next event, loop back to the first event after the last one
         }
 
-        function showSubpage(pageId) {
+        window.showSubpage = function(pageId) {
             var subpages = document.getElementsByClassName('subpage');
             for (var i = 0; i < subpages.length; i++) {
                 subpages[i].classList.remove('active');
@@ -76,9 +76,11 @@ var trackEvents = [
             document.querySelector(`button[onclick="showSubpage('${pageId}')"]`).classList.add('selected');
             if(pageId === 'Decathlon'){
                 createEventRows();
+                createVisualizationRows();
+                updateAllVisualizations();
                 setSameHeight();
             }
-        }
+        };
 
         function calculateTrackEventScore(score, event) {
             return event.isTimed ? Math.round(event.A * Math.pow((event.B - score), event.C)) : Math.round(event.A * Math.pow((score - event.B), event.C));
@@ -142,7 +144,7 @@ var trackEvents = [
         }
     
         // Function to update points and units for an event
-        function updateEventPoints(index) {
+        window.updateEventPoints = function(index) {
             var scoreInput = document.getElementById('deacthlon-score-' + index);
             var score = index ===  9 ? timeToSeconds(scoreInput.value) : parseFloat(scoreInput.value);
             var event = trackEvents[index];
@@ -152,8 +154,9 @@ var trackEvents = [
             var pointsElement = document.getElementById('deacthlon-points-' + index);
             pointsElement.textContent = Math.floor(points); // Display rounded points
             updateTotalScore(); // Update the total score after changing points
+            updateVisualization(index); // Update visualization for this event
             drawLines(scoreInput, points, trackEvents[index].points, trackEvents[index].WRpoints);
-        }
+        };
     
         // Function to update units based on score
         function updateUnits(index, score) {
@@ -173,14 +176,24 @@ var trackEvents = [
             var numericPoints = parseFloat(points);
             totalScore += numericPoints;
             });
-            scoreText = document.getElementById('deacthlon-total-score');
-            scoreText.textContent = totalScore;
+            scoreText = document.getElementById('decathlon-total-score');
+            if (scoreText) {
+                scoreText.textContent = totalScore;
+            }
             drawLines(scoreText, totalScore, 8321, 9126);
         }
     
         // Function to create event rows
         function createEventRows() {
             var eventsContainer = document.getElementById('deacthlon-events-container');
+            
+            // Check if rows already exist (only keep the header)
+            var existingRows = eventsContainer.querySelectorAll('.deacthlon-event-row');
+            if (existingRows.length > 0) {
+                // Rows already exist, don't create duplicates
+                return;
+            }
+            
             trackEvents.forEach(function(event, index) {
             var eventRow = document.createElement('div');
             eventRow.classList.add('deacthlon-event-row');
@@ -209,7 +222,126 @@ var trackEvents = [
             var leftColumn = document.getElementById('deacthlon-events-container');
             var otherDiv = document.getElementById('deacthlon-visual-container');
             var leftColumnHeight = leftColumn.offsetHeight; // Get the height of the left-column div
-            otherDiv.style.height = leftColumnHeight + 'px'; // Set the height of the other div to match
+            otherDiv.style.minHeight = leftColumnHeight + 'px'; // Set the min-height of the other div to match
+        }
+
+        // Create the legend
+        function createLegend() {
+            var legend = document.createElement('div');
+            legend.classList.add('visualization-legend');
+            legend.id = 'visualization-legend';
+
+            var legendItems = [
+                { color: '#d32f2f', label: 'Your Score' },
+                { color: '#388e3c', label: "Ryan's Best" },
+                { color: '#1976d2', label: 'World Record' }
+            ];
+
+            legendItems.forEach(item => {
+                var legendItem = document.createElement('div');
+                legendItem.classList.add('legend-item');
+
+                var colorBox = document.createElement('div');
+                colorBox.classList.add('legend-color-box');
+                colorBox.style.backgroundColor = item.color;
+
+                var label = document.createElement('span');
+                label.textContent = item.label;
+
+                legendItem.appendChild(colorBox);
+                legendItem.appendChild(label);
+                legend.appendChild(legendItem);
+            });
+
+            return legend;
+        }
+
+        // Create visualization rows for each event
+        function createVisualizationRows() {
+            var visualizationContainer = document.getElementById('deacthlon-visual-container');
+            // Clear existing rows and legend (keep the header)
+            var existingRows = visualizationContainer.querySelectorAll('.visualization-row');
+            existingRows.forEach(row => row.remove());
+            var existingLegend = visualizationContainer.querySelector('.visualization-legend');
+            if (existingLegend) existingLegend.remove();
+
+            trackEvents.forEach(function(event, index) {
+                var visualizationRow = document.createElement('div');
+                visualizationRow.classList.add('visualization-row');
+                visualizationRow.id = 'visualization-row-' + index;
+
+                visualizationRow.innerHTML = `
+                    <div class="visualization-event-title">${event.title}</div>
+                    <div class="visualization-lines-container" id="visualization-container-${index}">
+                    </div>
+                `;
+                visualizationContainer.appendChild(visualizationRow);
+            });
+
+            // Add legend at the bottom
+            var legend = createLegend();
+            visualizationContainer.appendChild(legend);
+        }
+
+        // Update visualization for a specific event
+        function updateVisualization(eventIndex) {
+            var scoreInput = document.getElementById('deacthlon-score-' + eventIndex);
+            var event = trackEvents[eventIndex];
+            
+            // Get user score
+            var userScore = eventIndex === 9 ? timeToSeconds(scoreInput.value) : parseFloat(scoreInput.value);
+            
+            if (isNaN(userScore) || userScore === '') {
+                userScore = 0;
+            }
+
+            // Calculate user points
+            var userPoints = userScore > 0 ? calculateTrackEventScore(userScore, event) : 0;
+            
+            // Ryan's points and world record points
+            var ryanPoints = event.points;
+            var wrPoints = event.WRpoints;
+
+            // Find max for scaling - always show at least the world record as reference
+            var maxPoints = Math.max(userPoints || 0, ryanPoints, wrPoints);
+            if (maxPoints === 0) maxPoints = 1;
+
+            // Calculate percentages
+            var userPercent = (userPoints / maxPoints) * 100;
+            var ryanPercent = (ryanPoints / maxPoints) * 100;
+            var wrPercent = (wrPoints / maxPoints) * 100;
+
+            // Get container and clear
+            var container = document.getElementById('visualization-container-' + eventIndex);
+            if (!container) return;
+            container.innerHTML = '';
+
+            // Create lines - sorted by length so longest appears first (behind)
+            var lines = [
+                { percent: userPercent, points: Math.floor(userPoints), className: 'user-score' },
+                { percent: ryanPercent, points: ryanPoints, className: 'ryan-best' },
+                { percent: wrPercent, points: wrPoints, className: 'world-record' }
+            ];
+
+            // Sort by percentage descending so longest lines are added first (appear behind)
+            lines.sort((a, b) => b.percent - a.percent);
+
+            lines.forEach(line => {
+                // Always show at least a minimal bar for visibility, even if 0%
+                var displayPercent = Math.max(line.percent, line.percent === 0 ? 2 : 0);
+                var lineElement = document.createElement('div');
+                lineElement.classList.add('visualization-line', line.className);
+                lineElement.style.width = displayPercent + '%';
+                lineElement.textContent = line.points;
+                container.appendChild(lineElement);
+            });
+        }
+
+        // Update all visualizations
+        function updateAllVisualizations() {
+            trackEvents.forEach((event, index) => {
+                updateVisualization(index);
+            });
         }
         
         function getUserScore(eventIndex) {
@@ -355,6 +487,21 @@ var trackEvents = [
           // Set up the observer for each highscore element
           document.addEventListener('DOMContentLoaded', () => {
             const statisticsSection = document.querySelector('.statistics-section');
+            
+            if (!statisticsSection) return; // Safety check
+            
+            // Create Day 1 and Day 2 sections
+            const day1Section = document.createElement('div');
+            day1Section.classList.add('day-section');
+            day1Section.innerHTML = '<h2>Day 1</h2><div class="day-events"></div>';
+            
+            const day2Section = document.createElement('div');
+            day2Section.classList.add('day-section');
+            day2Section.innerHTML = '<h2>Day 2</h2><div class="day-events"></div>';
+            
+            const day1Events = day1Section.querySelector('.day-events');
+            const day2Events = day2Section.querySelector('.day-events');
+            
             trackEvents.forEach((event, index) => {
               const trackEventElement = document.createElement('div');
               trackEventElement.classList.add('track-event');
@@ -362,8 +509,25 @@ var trackEvents = [
                 <h3>${event.title}</h3>
                 <div id="highScore-${index}" class="highScore-animate" data-index="${index}">0</div>
               `;
-              statisticsSection.appendChild(trackEventElement);
-              observer.observe(document.getElementById(`highScore-${index}`));
+              
+              // Add to Day 1 or Day 2 based on event.day1 property
+              if (event.day1) {
+                day1Events.appendChild(trackEventElement);
+              } else {
+                day2Events.appendChild(trackEventElement);
+              }
+            });
+            
+            // Add both sections to the statistics section
+            statisticsSection.appendChild(day1Section);
+            statisticsSection.appendChild(day2Section);
+            
+            // Now observe elements after they're in the DOM
+            trackEvents.forEach((event, index) => {
+              const highScoreElement = document.getElementById(`highScore-${index}`);
+              if (highScoreElement) {
+                observer.observe(highScoreElement);
+              }
             });
           });
           
