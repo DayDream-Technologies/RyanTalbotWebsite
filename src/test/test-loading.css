@@ -1,0 +1,116 @@
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+/* Gradient Background */
+.gradient-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top right, black 0%, #001900 25%, #003200 50%, #004b00 75%, #006400 100%);
+    z-index: 1;
+}
+
+/* Logo Container */
+.logo-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Ryan Logo SVG */
+.ryan-logo {
+    width: 50vw;
+    height: 50vw;
+    max-width: 90vw;
+    max-height: 90vh;
+    filter: drop-shadow(0 0 20px rgba(100, 200, 100, 0.5));
+    animation: animateLogo 2.5s ease-in-out forwards;
+}
+
+/* Logo Animation - Drawing effect simulation */
+@keyframes animateLogo {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(0deg);
+        filter: drop-shadow(0 0 5px rgba(100, 200, 100, 0.2));
+    }
+    10% {
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 30px rgba(100, 200, 100, 0.8));
+    }
+    90% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 30px rgba(100, 200, 100, 0.8));
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 20px rgba(100, 200, 100, 0.5));
+    }
+}
+
+/* Fade out animation for overlay */
+.loading-overlay.fade-out {
+    animation: fadeOutOverlay 1s ease-in forwards;
+    pointer-events: none;
+}
+
+@keyframes fadeOutOverlay {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Main Content */
+.main-content {
+    opacity: 0;
+    animation: fadeInContent 1s ease-in 2.5s forwards;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .ryan-logo {
+        width: 60vw;
+        height: 60vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .ryan-logo {
+        width: 70vw;
+        height: 70vw;
+    }
+}

@@ -1,5 +1,6 @@
 Calendly for client consultations?
 New PRs?
+New Rankings?
 Calendar for upcoming meets?
 New timeline events?
 Add a map of previous events?

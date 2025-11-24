@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="English">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <link rel="icon" href="../css/spartan_helmet.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="test-loading.css">
+    <title>Ryan Talbot - Loading Test</title>
+</head>
+<body>
+    <!-- Loading Screen Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <!-- Gradient Background -->
+        <div class="gradient-background"></div>
+        
+        <!-- Logo Container -->
+        <div class="logo-container">
+            <img id="ryanlLogo" class="ryan-logo" src="../images/RyanLogo.svg" alt="Ryan Talbot Logo">
+        </div>
+    </div>
+
+    <!-- Main Content (Initially Hidden) -->
+    <div id="mainContent" class="main-content">
+        <div class="header"><h1>RYAN TALBOT</h1></div>
+        
+        <div id="topbar">
+            <button class="c-button c-button--gooey selected">Test Section 1
+                <div class="c-button__blobs">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </button>
+            <button class="c-button c-button--gooey">Test Section 2
+                <div class="c-button__blobs">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </button>
+        </div>
+
+        <div id="about-text">
+            <h1>Welcome to the Loading Animation Test</h1>
+            <p>This is a test page to showcase the loading animation with the Ryan Talbot logo. The SVG logo animates with a drawing effect before fading out to reveal this content.</p>
+            
+            <h2>Animation Features</h2>
+            <ul>
+                <li>Gradient background matching the header style</li>
+                <li>SVG drawing animation for the logo</li>
+                <li>Smooth fade-out transition</li>
+                <li>Content fade-in effect</li>
+            </ul>
+
+            <h2>Sample Content Section</h2>
+            <p>This is sample content that appears after the loading animation completes. The logo and gradient background fade out to reveal the site content underneath.</p>
+            
+            <p>Ryan Talbot is an American track and field athlete who competes in the Decathlon. This loading screen animation creates an impressive first impression while the page loads in the background.</p>
+
+            <h2>More Information</h2>
+            <p>The animation uses SVG stroke animations for the drawing effect and CSS transitions for the fade-out. This creates a smooth, professional loading experience.</p>
+        </div>
+    </div>
+
+    <script src="test-loading.js"></script>
+</body>
+</html>
+
