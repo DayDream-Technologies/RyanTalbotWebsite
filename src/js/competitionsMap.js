@@ -40,6 +40,14 @@ const competitions = [
         score: "7677 Decathlon",
         color: "#c2185b"
     },
+    {
+        name: "Thorpe Cup",
+        location: "Wetzlar, Germany",
+        lat: 50.5607,
+        lng: 8.0699,
+        score: "Team USA Winner",
+        color: "#1976d2"
+    },
 ];
 
 // Initialize map when the Events subpage is shown

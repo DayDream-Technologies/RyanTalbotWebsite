@@ -242,13 +242,16 @@ h4, h5, h6 {
 #timeline {
   position: relative;
   margin-bottom: 200px;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 #timeline::before {
   content: '';
   position: absolute;
   top: calc(50% + 15px);
-  left: 0;
-  width: 100%;
+  left: 10%;
+  right: 10%;
+  width: auto;
   border-top: 5px solid black;
 }
 .fa {
