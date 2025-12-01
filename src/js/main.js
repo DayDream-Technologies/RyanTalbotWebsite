@@ -29,13 +29,13 @@ var trackEvents = [
             {title: '4/16', description: 'Ryan set the Forest Hils Central High School record for pole vault at 13ft 2in', symbol: 'fas fa-walking', date: 2016.333, color: 'green', image: 'src/images/timeline/hs-outdoor-pr.png'},
             {title: '12/18', description: 'Ryan committed to the Michigan State University track and field team', symbol: 'fas fa-graduation-cap', date: 2018.917, color: 'darkgreen', image: 'src/images/timeline/commitment.png'},
             {title: '2/19', description: 'Ryan broke his own pole vault record for the last time in high school and won the indoor state meet with a height of 16ft 0in. This record still remains unbroken today', symbol: 'fas fa-medal', date: 2019.167, color: 'gold', image: 'src/images/timeline/hs-pr.png'},
-            {title: '5/22', description: 'Ryan won the decathlon event at the Big Ten conference championship and set a new Michigan State University decathlon record of 8064', symbol: 'fas fa-medal', date: 2022.417, color: 'gold', image: 'src/images/timeline/big-ten-first-place.png'},
-            {title: '11/23', description: 'Ryan placed 3rd at the Pan-American Games hosted in Chile. This was his first competition representing the United States of America', symbol: 'fas fa-medal', date: 2023.917, color: '#cd7f32', image: 'src/images/timeline/panam-tv.png'},
-            {title: '5/24', description: 'Ryan won his second Big Ten Conference  championship decathlon as a capstone to the 2024 regular season. Two weeks later he placed 9th at NCAA national championships and received All-American status.', symbol: 'fas fa-flag-usa', date: 2024.417, color: 'red', image: 'src/images/timeline/B1G-High-Jump.png'},
-            {title: '6/24', description: 'Ryan placed 8th at the US Olympic Trials', symbol: 'fas fa-medal', date: 2024.5, color: 'bronze', image: 'src/images/timeline/panam-tv.png'},
-            {title: '7/24', description: 'Ryan competed for Team USA at the Thorpe Cup in Wetzlar, Germany. Team USA won the competition.', symbol: 'fas fa-flag-usa', date: 2024.583, color: 'blue', image: 'src/images/Team_USA_pics/flag_flex.jpg'},
+            {title: '5/22', description: 'Ryan won the decathlon event at the Big Ten conference championship and set a new Michigan State University decathlon record of 8064', symbol: 'fas fa-medal', date: 2022.417, color: 'gold', image: 'src/images/timeline/Big-Ten-(1).jpeg'},
+            {title: '11/23', description: 'Ryan placed 3rd at the Pan-American Games hosted in Chile. This was his first competition representing the United States of America', symbol: 'fas fa-medal', date: 2023.917, color: '#cd7f32', image: 'src/images/timeline/Panam-podium.jpeg'},
+            {title: '5/24', description: 'Ryan won his second Big Ten Conference  championship decathlon as a capstone to the 2024 regular season. Two weeks later he placed 9th at NCAA national championships and received All-American status.', symbol: 'fas fa-flag-usa', date: 2024.417, color: 'red', image: 'src/images/timeline/Big-Ten-(2).jpeg'},
+            {title: '6/24', description: 'Ryan placed 8th at the US Olympic Trials', symbol: 'fas fa-flag-usa', color: 'blue', date: 2024.5, image: 'src/images/timeline/Olympic-Trials.jpeg'},
+            {title: '7/24', description: 'Ryan competed for Team USA at the Thorpe Cup in Wetzlar, Germany. Team USA won the competition.', symbol: 'fas fa-medal', color: 'gold', date: 2024.583, image: 'src/images/timeline/Thorpe-team-USA.PNG'},
             {title: '1/25', description: 'Ryan Started his official coaching career at Grand Valley State University as an assistant coach for High Jump, Long Jump, Heptathlon, and Decathlon.', symbol: 'fas fa-anchor', date: 2025.083, color: 'blue', image: 'src/images/timeline/gvsu-coaching.jpg'},
-            {title: '10/25', description: 'Ryan moved to Chula Vista California to continue training for the 2028 Olympics', symbol: 'fas fa-mountain', date: 2025.833, color: 'brown', image: 'src/images/timeline/big-ten-first-place.png'},
+            {title: '10/25', description: 'Ryan moved to Chula Vista California to continue training for the 2028 Olympics', symbol: 'fas fa-mountain', date: 2025.833, color: 'brown', image: 'src/images/timeline/California-Mountains.jpg'},
         ];
         var currentYear = new Date().getFullYear();
         var currentMonth = new Date().getMonth() + 1;
@@ -53,13 +53,50 @@ var trackEvents = [
             var eventElement = document.createElement('div');
             eventElement.className = 'event';
             eventElement.style.right = ((currentDecimal - event.date) / (currentDecimal - timelineStartDate) * 80) + 10 + '%';
-            eventElement.innerHTML = '<i class="' + event.symbol + '" style="color: ' + event.color + '; font-size: 30px; cursor: pointer;" onclick="updateContent(\'' + event.image + '\', \'' + event.description + '\')"></i><p>' + event.title + '</p>';
+            eventElement.innerHTML = '<div class="event-highlight"></div><i class="' + event.symbol + '" style="color: ' + event.color + '; font-size: 30px; cursor: pointer;"></i><p>' + event.title + '</p>';
+            
+            // Add click handler for each icon
+            var iconElement = eventElement.querySelector('i');
+            iconElement.addEventListener('click', function() {
+                updateContent(event.image, event.description);
+                highlightEvent(eventElement);
+                resetAutoUpdateTimer();
+            });
+            
             timeline.appendChild(eventElement);
         }
 
         function autoUpdateTimeline() {
             updateContent(events[currentTimelineIndex].image, events[currentTimelineIndex].description);
+            var allEventElements = document.querySelectorAll('.event');
+            if (allEventElements[currentTimelineIndex]) {
+                highlightEvent(allEventElements[currentTimelineIndex]);
+            }
             currentTimelineIndex = (currentTimelineIndex + 1) % events.length; // Move to the next event, loop back to the first event after the last one
+        }
+
+        var autoUpdateTimer = null;
+
+        function highlightEvent(eventElement) {
+            // Clear previous highlight
+            document.querySelectorAll('.event-highlight').forEach(h => {
+                h.classList.remove('active', 'fading');
+            });
+            
+            // Add highlight to current event
+            var highlight = eventElement.querySelector('.event-highlight');
+            if (highlight) {
+                highlight.classList.add('active');
+                // Trigger fading animation
+                setTimeout(() => {
+                    highlight.classList.add('fading');
+                }, 50);
+            }
+        }
+
+        function resetAutoUpdateTimer() {
+            clearInterval(autoUpdateTimer);
+            autoUpdateTimer = setInterval(autoUpdateTimeline, 10000);
         }
 
         window.showSubpage = function(pageId) {
@@ -537,9 +574,34 @@ var trackEvents = [
             });
           });
           
-        autoUpdateTimeline();
-        setInterval(autoUpdateTimeline, 10000);
         events.forEach(addEvent);
+        autoUpdateTimeline();
+        resetAutoUpdateTimer();
+        
+        // Add hover effect for adjacent events
+        document.querySelectorAll('.event').forEach((eventElement, index) => {
+            const allEvents = document.querySelectorAll('.event');
+            
+            eventElement.addEventListener('mouseenter', function() {
+                allEvents.forEach((e, i) => {
+                    if (i < index) {
+                        e.style.transform = 'translateX(-50px)';
+                    } else if (i > index) {
+                        e.style.transform = 'translateX(50px)';
+                    } else {
+                        e.style.zIndex = '10';
+                    }
+                });
+            });
+            
+            eventElement.addEventListener('mouseleave', function() {
+                allEvents.forEach((e, i) => {
+                    e.style.transform = 'translateX(0)';
+                    e.style.zIndex = '0';
+                });
+            });
+        });
+        
         timedEvents.forEach(addTrackEvent);
         setInterval(updateTimerAndTrackEvents, 1000);
         updateContent(events[events.length - 1].image, events[events.length - 1].description);

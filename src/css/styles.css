@@ -262,10 +262,62 @@ h4, h5, h6 {
   position: absolute;
   top: 0;
   text-align: center;
+  transition: transform 0.3s ease, z-index 0.3s ease;
+}
+
+.event-highlight {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 100, 0, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.event-highlight.active {
+  opacity: 1;
+}
+
+.event-highlight.fading {
+  animation: fadeHighlight 10s linear forwards;
+}
+
+@keyframes fadeHighlight {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.event p {
+  display: none;
+  margin: 5px 0 0 0;
+  white-space: nowrap;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.event:hover p {
+  display: block;
 }
 #startYear, #currentYear{
   font-weight: bold;
 }
+
+#yearDiv {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
 #startYear::before, #currentYear::after {
   content: "|";
   position: absolute;
