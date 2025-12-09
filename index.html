@@ -146,8 +146,34 @@
             <h3>Real client testimonials:</h3>
             <p>"Ryan pushed me to higher levels of athletic performance in Track resulting in a 10%+ decrease in my 300m hurdles time and greater endurance while playing soccer." -David W.</p>
             <h2>Interested?</h2>
-            <p>If you would like to schedule a consultation appointment with Ryan, you can do so through the following form:</p>
-            <h1>ADD CONTACT FORM HERE</h1><!--Form needs subject for meeting and available times -->
+            <p>If you would like to schedule a consultation appointment with Ryan, you can do so here:</p>
+            
+            <div id="coaching-form-container" style="max-width: 900px; margin: 30px auto; padding: 20px; background: #fafafa; border-left: 4px solid #006400; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                <div id="successMessage" style="display: none; background-color: #d1fae5; color: #065f46; padding: 15px; border-radius: 4px; margin-bottom: 20px; text-align: center; font-weight: 500;">
+                    Thank you! Your message has been sent successfully. We'll be in touch soon.
+                </div>
+                
+                <form id="coachingForm" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="6ccfcd2d-fd84-4ebc-b965-73ca758fcd6b">
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label for="coach-name" style="display: block; font-weight: 600; margin-bottom: 8px; color: #1a1a1a;">Your Name *</label>
+                        <input type="text" id="coach-name" name="name" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 16px; font-family: inherit; box-sizing: border-box; transition: border-color 0.3s ease;">
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label for="coach-email" style="display: block; font-weight: 600; margin-bottom: 8px; color: #1a1a1a;">Your Email *</label>
+                        <input type="email" id="coach-email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 16px; font-family: inherit; box-sizing: border-box; transition: border-color 0.3s ease;">
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label for="coach-message" style="display: block; font-weight: 600; margin-bottom: 8px; color: #1a1a1a;">What are your coaching and/or dietary goals? *</label>
+                        <textarea id="coach-message" name="message" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 16px; font-family: inherit; box-sizing: border-box; min-height: 120px; resize: vertical; transition: border-color 0.3s ease;"></textarea>
+                    </div>
+                    
+                    <button type="submit" style="width: 100%; padding: 12px; background-color: #006400; color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease;">Send Message</button>
+                </form>
+            </div>
         </div>
     </div>
     <div id="Decathlon" class="subpage">
@@ -286,5 +312,43 @@
     <script src="./src/js/main.js"></script>
     <script src="./src/js/competitionsMap.js"></script>
     <script src="./src/test/test-loading.js"></script>
+    
+    <script>
+        // Handle coaching form submission
+        document.getElementById('coachingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            // Submit to Web3Forms
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Reset form
+                    document.getElementById('coachingForm').reset();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('successMessage').style.display = 'none';
+                    }, 5000);
+                    
+                    // Scroll to success message
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error sending your message. Please try again.');
+            });
+        });
+    </script>
 </body>
 </html>
