@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    
+    <!-- Home Page -->
+    <url>
+        <loc>https://ryantalbot.com</loc>
+        <lastmod>2024-12-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://ryantalbot.com/src/images/RyanLogo.svg</image:loc>
+            <image:title>Ryan Talbot Logo</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://ryantalbot.com/src/images/Team_USA_pics/flag_flex.jpg</image:loc>
+            <image:title>Ryan Talbot with Team USA flag</image:title>
+        </image:image>
+    </url>
+    
+    <!-- Contact Page -->
+    <url>
+        <loc>https://ryantalbot.com/contact.html</loc>
+        <lastmod>2024-12-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Score Calculator Page -->
+    <url>
+        <loc>https://ryantalbot.com/score-calculator.html</loc>
+        <lastmod>2024-12-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Data Analytics Page -->
+    <url>
+        <loc>https://ryantalbot.com/data.html</loc>
+        <lastmod>2024-12-17</lastmod>
+        <changefreq>quarterly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Image Sitemaps -->
+    <url>
+        <loc>https://ryantalbot.com/src/images/carnivore.jpg</loc>
+        <image:image>
+            <image:loc>https://ryantalbot.com/src/images/carnivore.jpg</image:loc>
+            <image:title>Carnivore Diet Meal Preparation</image:title>
+        </image:image>
+    </url>
+    
+    <url>
+        <loc>https://ryantalbot.com/src/images/msu_logo.jpg</loc>
+        <image:image>
+            <image:loc>https://ryantalbot.com/src/images/msu_logo.jpg</image:loc>
+            <image:title>Michigan State University Logo</image:title>
+        </image:image>
+    </url>
+    
+    <url>
+        <loc>https://ryantalbot.com/src/images/World_Athletics_Logo.jpg</loc>
+        <image:image>
+            <image:loc>https://ryantalbot.com/src/images/World_Athletics_Logo.jpg</image:loc>
+            <image:title>World Athletics Logo</image:title>
+        </image:image>
+    </url>
+
+</urlset>
+

@@ -1,0 +1,22 @@
+Main:
+    Shorten tab text size when width decreases
+
+Data page:
+    Import top events using https://github.com/nimarion/worldathletics/tree/main/src 
+    Add attributions for worldathletics pull repo
+    Add historical data graphs
+    Fix score graphs
+
+Events page:
+    Add new events Google calendar
+    Format IG content
+
+Coaching page:
+    Add new events calendar
+    Add images and quotes
+
+Logan:
+    Visual improvements
+    Better instagram implementation
+    Create coaching page
+    Add logo -- ask david
