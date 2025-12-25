@@ -47,6 +47,53 @@ var trackEvents = [
             document.getElementById('image').src = image;
             document.getElementById('text').innerText = description;
         }
+        
+        function updateMobileTimelineDot(index) {
+            var dots = document.querySelectorAll('.timeline-dot');
+            dots.forEach(function(dot, i) {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        function createMobileTimelineDots() {
+            var dotsContainer = document.getElementById('timelineDots');
+            if (!dotsContainer) return;
+            
+            dotsContainer.innerHTML = '';
+            events.forEach(function(event, index) {
+                var dot = document.createElement('div');
+                dot.className = 'timeline-dot';
+                if (index === currentTimelineIndex) {
+                    dot.classList.add('active');
+                }
+                dot.addEventListener('click', function() {
+                    navigateToTimelineEvent(index);
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+        
+        function navigateToTimelineEvent(index) {
+            if (index < 0 || index >= events.length) return;
+            currentTimelineIndex = index;
+            updateContent(events[index].image, events[index].description);
+            updateMobileTimelineDot(index);
+            resetAutoUpdateTimer();
+        }
+        
+        window.navigateTimeline = function(direction) {
+            var newIndex = currentTimelineIndex + direction;
+            if (newIndex < 0) {
+                newIndex = events.length - 1;
+            } else if (newIndex >= events.length) {
+                newIndex = 0;
+            }
+            navigateToTimelineEvent(newIndex);
+        };
 
         function addEvent(event) {
             var timeline = document.getElementById('timeline');
@@ -67,6 +114,8 @@ var trackEvents = [
         }
 
         function autoUpdateTimeline() {
+            // Update dot for current event before moving to next
+            updateMobileTimelineDot(currentTimelineIndex);
             updateContent(events[currentTimelineIndex].image, events[currentTimelineIndex].description);
             var allEventElements = document.querySelectorAll('.event');
             if (allEventElements[currentTimelineIndex]) {
@@ -116,7 +165,10 @@ var trackEvents = [
             for (var i = 0; i < buttons.length; i++) {
                 buttons[i].classList.remove('selected');
             }
-            document.querySelector(`button[onclick="showSubpage('${pageId}')"]`).classList.add('selected');
+            var desktopButton = document.querySelector(`button[onclick="showSubpage('${pageId}')"]`);
+            if (desktopButton) {
+                desktopButton.classList.add('selected');
+            }
             if(pageId === 'Decathlon'){
                 createEventRows();
                 createVisualizationRows();
@@ -124,6 +176,73 @@ var trackEvents = [
                 setSameHeight();
             }
         };
+
+        // Mobile menu functions
+        window.toggleMobileMenu = function() {
+            var menu = document.getElementById('mobileMenu');
+            var button = document.getElementById('mobileMenuButton');
+            menu.classList.toggle('active');
+            button.classList.toggle('active');
+        };
+
+        window.handleMobileNav = function(pageId) {
+            showSubpage(pageId);
+            closeMobileMenu();
+            
+            // Update mobile menu active state
+            var menuItems = document.querySelectorAll('.mobile-menu-item');
+            menuItems.forEach(function(item) {
+                item.classList.remove('active');
+                if (item.textContent.trim() === getPageTitle(pageId)) {
+                    item.classList.add('active');
+                }
+            });
+        };
+
+        function getPageTitle(pageId) {
+            var titles = {
+                'Highlights': 'Highlights',
+                'Decathlon': 'Decathlon Overview',
+                'Carnivore': 'Health & Nutrition',
+                'Events': 'Events',
+                'Coaching': 'Coaching'
+            };
+            return titles[pageId] || pageId;
+        }
+
+        function closeMobileMenu() {
+            var menu = document.getElementById('mobileMenu');
+            var button = document.getElementById('mobileMenuButton');
+            menu.classList.remove('active');
+            button.classList.remove('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            var menu = document.getElementById('mobileMenu');
+            var button = document.getElementById('mobileMenuButton');
+            var isClickInsideMenu = menu.contains(event.target);
+            var isClickOnButton = button.contains(event.target);
+            
+            if (!isClickInsideMenu && !isClickOnButton && menu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Set initial active state for mobile menu on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            var activeSubpage = document.querySelector('.subpage.active');
+            if (activeSubpage) {
+                var pageId = activeSubpage.id;
+                var menuItems = document.querySelectorAll('.mobile-menu-item');
+                menuItems.forEach(function(item) {
+                    item.classList.remove('active');
+                    if (item.textContent.trim() === getPageTitle(pageId)) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        });
 
         function calculateTrackEventScore(score, event) {
             return event.isTimed ? Math.round(event.A * Math.pow((event.B - score), event.C)) : Math.round(event.A * Math.pow((score - event.B), event.C));
@@ -575,8 +694,19 @@ var trackEvents = [
           });
           
         events.forEach(addEvent);
+        createMobileTimelineDots();
+        // Initialize with first event and set active dot
+        updateMobileTimelineDot(currentTimelineIndex);
         autoUpdateTimeline();
         resetAutoUpdateTimer();
+        
+        // Recreate dots on window resize (in case switching between mobile/desktop)
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 900) {
+                createMobileTimelineDots();
+                updateMobileTimelineDot(currentTimelineIndex);
+            }
+        });
         
         // Add hover effect for adjacent events
         document.querySelectorAll('.event').forEach((eventElement, index) => {

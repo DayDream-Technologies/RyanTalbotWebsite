@@ -82,6 +82,22 @@
             </div>
         </button>
     </div>
+    
+    <!-- Mobile Menu Button -->
+    <button id="mobileMenuButton" class="mobile-menu-button" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="mobile-menu">
+        <a href="#" class="mobile-menu-item" onclick="handleMobileNav('Highlights')">Highlights</a>
+        <a href="#" class="mobile-menu-item" onclick="handleMobileNav('Decathlon')">Decathlon Overview</a>
+        <a href="#" class="mobile-menu-item" onclick="handleMobileNav('Carnivore')">Health & Nutrition</a>
+        <a href="#" class="mobile-menu-item" onclick="handleMobileNav('Events')">Events</a>
+        <a href="#" class="mobile-menu-item" onclick="handleMobileNav('Coaching')">Coaching</a>
+    </div>
 
     <div id="Highlights" class="subpage active">
         <div class="image-container">
@@ -143,7 +159,7 @@
         <div id="text-section">
             <p id="text"></p>
         </div>
-        <div>
+        <div class="timeline-header-section">
             <h1>Timeline of Ryan's career:</h1>
             <p>(click an icon for more details)</p>
             <div id="yearDiv" style="display: flex; justify-content: space-between;">
@@ -151,6 +167,20 @@
                 <span id="currentYear"></span>
             </div>
         </div>
+        
+        <!-- Mobile Timeline Navigation Bar -->
+        <div id="mobileTimelineNav" class="mobile-timeline-nav">
+            <button id="timelineArrowLeft" class="timeline-arrow" onclick="navigateTimeline(-1)" aria-label="Previous timeline event">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div id="timelineDots" class="timeline-dots">
+                <!-- Dots will be added here by JavaScript -->
+            </div>
+            <button id="timelineArrowRight" class="timeline-arrow" onclick="navigateTimeline(1)" aria-label="Next timeline event">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
         <div id="timeline">
             <!-- Timeline items will be added here by JavaScript -->
         </div>
